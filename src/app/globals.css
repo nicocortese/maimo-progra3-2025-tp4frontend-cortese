@@ -5,4 +5,10 @@
   --foreground: #171717;
 }
 
+#pLogo {
+  font-family: "Bebas Neue", sans-serif;
+}
 
+nav, input {
+  font-family: "Archivo", sans-serif;
+}
