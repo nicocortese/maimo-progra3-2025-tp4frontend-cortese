@@ -1,6 +1,6 @@
 import ShopCards from "./ShopCards";
 
-const ShopGrid = () => {
+const ShopGrid = ({ products = [] }) => {
   return (
     <div>
       <h2 className="text-3xl flex justify-center font-semibold pt-4">
@@ -8,14 +8,9 @@ const ShopGrid = () => {
       </h2>
 
       <div className="grid grid-cols-4 gap-6 max-w-[1200px] mx-auto py-10">
-        <ShopCards />
-        <ShopCards />
-        <ShopCards />
-        <ShopCards />
-        <ShopCards />
-        <ShopCards />
-        <ShopCards />
-        <ShopCards />
+        {products.map((product) => (
+          <ShopCards key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );
