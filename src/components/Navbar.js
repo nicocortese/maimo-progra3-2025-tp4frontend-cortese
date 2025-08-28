@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center fixed top-0 bg-[#1a1a1a] w-full z-50 px-8 h-18">
+
+    <div className="flex justify-between items-center fixed top-0 bg-[#1a1a1a] w-full z-50 px-8 h-16">
       <p id="pLogo" className="text-[#FFEFEF] font-bold text-4xl">
         LOGO PÁGINA
       </p>
@@ -11,6 +11,7 @@ const Navbar = () => {
       <nav className="flex justify-center flex-grow ">
         <ul className="flex items-center gap-8 text-[#FFEFEF] font-medium text-[16px] tracking-wider">
           <li className=" text-[#D64541]">
+    
             <Link href="/">HOME</Link>
           </li>
 
@@ -34,6 +35,7 @@ const Navbar = () => {
             <Link href="/">MARCAS</Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
+
               className="h-6 w-6"
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -75,6 +77,7 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="BUSCAR"
+
             className="outline-none text-xl w-full pl-2 tracking-widest "
           />
         </div>
