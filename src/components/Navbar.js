@@ -2,15 +2,16 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
+
     <div className="flex justify-between items-center fixed top-0 bg-[#1a1a1a] w-full z-50 px-8 h-16">
       <p id="pLogo" className="text-[#FFEFEF] font-bold text-4xl">
         LOGO PÁGINA
       </p>
 
-      {/* NAV LINKS */}
-      <nav className="flex justify-center flex-grow">
-        <ul className="flex items-center gap-10 text-[#FFEFEF] font-medium text-[15px] tracking-wider">
-          <li className="text-[#D64541]">
+      <nav className="flex justify-center flex-grow ">
+        <ul className="flex items-center gap-8 text-[#FFEFEF] font-medium text-[16px] tracking-wider">
+          <li className=" text-[#D64541]">
+    
             <Link href="/">HOME</Link>
           </li>
 
@@ -18,7 +19,7 @@ const Navbar = () => {
             <Link href="/">SHOP</Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-6 w-6"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -34,7 +35,8 @@ const Navbar = () => {
             <Link href="/">MARCAS</Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+
+              className="h-6 w-6"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -60,7 +62,7 @@ const Navbar = () => {
         <div className="flex items-center bg-[#FFEFEF] text-[#1a1a1a]/80 rounded-full px-3 py-1 w-[350px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 cursor-pointer"
+            className="h-5 w-5 cursor-pointer"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -75,7 +77,8 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="BUSCAR"
-            className="outline-none text-[16px] w-full pl-2  tracking-widest "
+
+            className="outline-none text-xl w-full pl-2 tracking-widest "
           />
         </div>
 

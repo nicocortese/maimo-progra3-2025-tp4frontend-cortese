@@ -1,11 +1,13 @@
 import { Bebas_Neue, Archivo } from "next/font/google";
 import "./globals.css";
 
+
 const bebasNeue = Bebas_Neue({
   variable: "--bebas_neue",
   subsets: ["latin"],
   weight: "400"
 });
+
 
 const archivo = Archivo({
   variable: "--archivo",
