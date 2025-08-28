@@ -1,7 +1,13 @@
+import Hero from "./Hero";
+import ShopGrid from "./ShopGrid";
+
 const HomeContainer = () => {
   return (
-    <h1 className="flex justify-center items-center pt-30 text-7xl font-bold">ZAPATILLAS RETRO</h1>
-  )
-}
+    <div className="home_container">
+      <Hero/>
+      <ShopGrid />
+    </div>
+  );
+};
 
-export default HomeContainer
+export default HomeContainer;
