@@ -1,17 +1,15 @@
+"use client";
+
 import Link from "next/link";
 
 const Navbar = () => {
   return (
-
     <div className="flex justify-between items-center fixed top-0 bg-[#1a1a1a] w-full z-50 px-8 h-16">
-      <p id="pLogo" className="text-[#FFEFEF] font-bold text-4xl">
-        LOGO PÁGINA
-      </p>
+      <p className="logoFont text-[#FFEFEF] font-bold text-4xl">LOGO PÁGINA</p>
 
-      <nav className="flex justify-center flex-grow ">
+      <nav className="flex justify-center flex-grow">
         <ul className="flex items-center gap-8 text-[#FFEFEF] font-medium text-[16px] tracking-wider">
-          <li className=" text-[#D64541]">
-    
+          <li className="text-[#D64541]">
             <Link href="/">HOME</Link>
           </li>
 
@@ -35,7 +33,6 @@ const Navbar = () => {
             <Link href="/">BRANDS</Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-
               className="h-6 w-6"
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -77,8 +74,7 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="BUSCAR"
-
-            className="outline-none text-xl w-full pl-2 tracking-widest "
+            className="outline-none text-base w-full pl-2 tracking-widest"
           />
         </div>
 

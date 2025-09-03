@@ -1,16 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 23, 23, 23; /* texto oscuro */
+  --background-start-rgb: 245, 245, 245; /* gris claro */
+  --background-end-rgb: 255, 255, 255; /* blanco */
+  --card-bg-rgb: 255, 255, 255; /* fondo de tarjetas */
+  --card-text-rgb: 23, 23, 23;
 }
 
-#pLogo {
-  font-family: "Bebas Neue", sans-serif;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255; /* texto claro */
+    --background-start-rgb: 20, 20, 20; /* gris oscuro */
+    --background-end-rgb: 40, 40, 40; /* gris medio */
+    --card-bg-rgb: 30, 30, 30; /* fondo de tarjetas */
+    --card-text-rgb: 255, 255, 255;
+  }
 }
 
-
-nav, input, h1, span {
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
   font-family: "Archivo", sans-serif;
 }
 
+.logoFont {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.custom-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 40px;
+}
+.grid_5_col {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    gap: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .grid > * {
+    grid-column: span 12;
+  }
+}
