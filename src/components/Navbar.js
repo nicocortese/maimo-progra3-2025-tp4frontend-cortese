@@ -32,7 +32,7 @@ const Navbar = () => {
           </li>
 
           <li className="flex items-center gap-1 cursor-pointer">
-            <Link href="/">MARCAS</Link>
+            <Link href="/">BRANDS</Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
 
@@ -49,11 +49,11 @@ const Navbar = () => {
           </li>
 
           <li>
-            <Link href="/">NOVEDADES</Link>
+            <Link href="/">ABOUT US</Link>
           </li>
 
           <li>
-            <Link href="/">ABOUT</Link>
+            <Link href="/">BLOG</Link>
           </li>
         </ul>
       </nav>
