@@ -1,18 +1,18 @@
 import { Bebas_Neue, Archivo } from "next/font/google";
 import "./globals.css";
-
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const bebasNeue = Bebas_Neue({
   variable: "--bebas_neue",
   subsets: ["latin"],
-  weight: "400"
+  weight: "400",
 });
-
 
 const archivo = Archivo({
   variable: "--archivo",
   subsets: ["latin"],
-  weight: ["400", "600", "700"]
+  weight: ["400", "600", "700"],
 });
 
 export const metadata = {
@@ -23,10 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${bebasNeue.variable} ${archivo.variable} antialiased`}
-      >
-        {children}
+      <body className={`${bebasNeue.variable} ${archivo.variable} antialiased`}>
+        <Navbar />
+        <div className="flex-1">{children}</div>
+        <Footer />
       </body>
     </html>
   );
