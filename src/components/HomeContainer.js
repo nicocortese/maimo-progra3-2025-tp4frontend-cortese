@@ -4,7 +4,7 @@ import ShopGrid from "./ShopGrid";
 const HomeContainer = () => {
   return (
     <div className="home_container">
-      <Hero/>
+      <Hero />
       <ShopGrid />
     </div>
   );
