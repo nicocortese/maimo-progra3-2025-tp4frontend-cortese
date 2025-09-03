@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,14 +7,25 @@ const ShopCards = ({ product }) => {
 
   const finalPrice = discount ? price - discount : price;
 
+  // Simulación de wishlist
+  const handleWishlist = () => {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    if (!wishlist.includes(id)) {
+      wishlist.push(id);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      alert(`${name} agregado a tu wishlist`);
+    }
+  };
+
   return (
     <article
-      className="relative group rounded-xl border text-[#1a1a1a] shadow hover:shadow-xl transition overflow-hidden"
+      className="relative group rounded-xl border shadow hover:shadow-xl transition overflow-hidden"
       style={{
         backgroundColor: `rgb(var(--card-bg-rgb))`,
         color: `rgb(var(--card-text-rgb))`,
       }}
     >
+      {/* Imagen */}
       <div className="relative w-full h-60">
         <Image
           src={image}
@@ -30,6 +42,7 @@ const ShopCards = ({ product }) => {
         </span>
       )}
 
+      {/* Info */}
       <div className="p-4">
         <h3 className="font-semibold text-lg truncate">{name}</h3>
 
@@ -46,38 +59,19 @@ const ShopCards = ({ product }) => {
         </div>
       </div>
 
-      {/* Hover acciones */}
-      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
-        {/* Search */}
-        <Link
-          href={`/product/${id}`}
-          className="p-3 bg-white rounded-full shadow hover:bg-gray-200"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
+      {/* Hover acciones - barra inferior */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white/90 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4 py-2">
+        {/* Ir al detalle */}
+        <Link href={`/product/${id}`} className="p-2 rounded-full hover:bg-gray-200">
+          🔍
         </Link>
 
-        {/* Heart */}
-        <button className="p-2 bg-white rounded-full shadow hover:bg-gray-200">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M20.8 4.6c-1.9-1.9-5-1.9-6.9 0l-.9.9-.9-.9c-1.9-1.9-5-1.9-6.9 0s-1.9 5 0 6.9l7.8 7.8 7.8-7.8c1.9-1.9 1.9-5 0-6.9z" />
-          </svg>
+        {/* Wishlist */}
+        <button
+          onClick={handleWishlist}
+          className="p-2 rounded-full hover:bg-gray-200"
+        >
+          ❤️
         </button>
       </div>
     </article>
