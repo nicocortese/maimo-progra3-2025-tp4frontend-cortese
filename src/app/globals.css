@@ -1,22 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --foreground-rgb: 23, 23, 23; /* texto oscuro */
+  --foreground-rgb: 26, 26, 26; /* texto oscuro */
   --background-start-rgb: 245, 245, 245; /* gris claro */
   --background-end-rgb: 255, 255, 255; /* blanco */
   --card-bg-rgb: 255, 255, 255; /* fondo de tarjetas */
-  --card-text-rgb: 23, 23, 23;
+  --card-text-rgb: 26, 26, 26;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255; /* texto claro */
-    --background-start-rgb: 20, 20, 20; /* gris oscuro */
-    --background-end-rgb: 40, 40, 40; /* gris medio */
-    --card-bg-rgb: 30, 30, 30; /* fondo de tarjetas */
-    --card-text-rgb: 255, 255, 255;
-  }
-}
+
 
 body {
   color: rgb(var(--foreground-rgb));
