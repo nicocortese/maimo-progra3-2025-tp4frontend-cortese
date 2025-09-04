@@ -7,15 +7,6 @@ const ShopCards = ({ product }) => {
 
   const finalPrice = discount ? price - discount : price;
 
-  // Simulación de wishlist
-  const handleWishlist = () => {
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    if (!wishlist.includes(id)) {
-      wishlist.push(id);
-      localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      alert(`${name} agregado a tu wishlist`);
-    }
-  };
 
   return (
     <article
@@ -31,7 +22,7 @@ const ShopCards = ({ product }) => {
           src={image}
           alt={name}
           fill
-          className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+          className="object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
@@ -68,7 +59,6 @@ const ShopCards = ({ product }) => {
 
         {/* Wishlist */}
         <button
-          onClick={handleWishlist}
           className="p-2 rounded-full hover:bg-gray-200"
         >
           ❤️
