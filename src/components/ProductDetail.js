@@ -1,123 +1,122 @@
 "use client";
-
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function ProductDetail({ id }) {
-  const products = [
-    {
-      id: "1",
-      name: "Zapatilla Roja",
-      image: "/images/red-shoe.jpg",
-      price: 100,
-      discount: 10,
-      description:
-        "Un clásico retro con estilo urbano. Ideal para el día a día.",
-    },
-    {
-      id: "2",
-      name: "Zapatilla Azul",
-      image: "/images/blue-shoe.jpg",
-      price: 120,
-      discount: 0,
-      description: "Diseño versátil y cómodo. Perfecto para cualquier ocasión.",
-    },
-  ];
+const ProductDetail = () => {
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [mainImage, setMainImage] = useState("/assets/imgs/producto1.jpg");
 
-  const product = products.find((p) => p.id === id);
-
-  if (!product) return <p className="p-6">Producto no encontrado</p>;
+  const product = {
+    id: 1,
+    name: "Converse Chuck Taylor",
+    brand: "Converse",
+    gender: "Unisex",
+    style: "Moda",
+    images: [
+      "/assets/imgs/producto1.jpg",
+      "/assets/imgs/producto1-2.jpg",
+      "/assets/imgs/producto1-3.jpg",
+    ],
+    price: 180,
+    discount: 20,
+    description:
+      "Las Converse Chuck Taylor son un clásico atemporal que combina estilo urbano con comodidad. Perfectas para uso diario, con su diseño icónico y materiales de alta calidad.",
+  };
 
   const finalPrice = product.discount
     ? product.price - product.discount
     : product.price;
 
-  return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
-      {/* Flecha volver a Home */}
-      <Link
-        href="/"
-        className="inline-flex items-center text-[rgb(var(--foreground-rgb))] hover:opacity-80 mb-6"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 mr-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-        Volver
-      </Link>
+  const sizes = ["38", "39", "40", "41", "42", "43", "44"];
 
-      {/* Contenedor del producto */}
-      <div
-        className="flex flex-col md:flex-row gap-12 items-center md:items-start p-8 rounded-xl shadow"
-        style={{
-          backgroundColor: "rgb(var(--card-bg-rgb))",
-          color: "rgb(var(--card-text-rgb))",
-        }}
-      >
-        {/* Imagen */}
-        <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] flex-shrink-0">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-contain"
-          />
+  return (
+    <section className="max-w-[1200px] mx-auto px-6 py-16">
+      <div className="flex flex-col lg:flex-row gap-12">
+        {/* Galería */}
+        <div className="flex-1">
+          <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow">
+            <Image
+              src={mainImage}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="flex gap-3 mt-4">
+            {product.images.map((img, idx) => (
+              <div
+                key={idx}
+                onMouseEnter={() => setMainImage(img)}
+                className={`relative w-24 h-24 rounded-lg overflow-hidden cursor-pointer border transition 
+                  ${
+                    mainImage === img
+                      ? "border-black"
+                      : "border-gray-200 hover:border-black"
+                  }`}
+              >
+                <Image
+                  src={img}
+                  alt={`${product.name}-${idx}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Info */}
-        <div className="flex flex-col gap-5 w-full">
-          <h1 className="text-4xl font-bold logoFont">{product.name}</h1>
+        {/* Información */}
+        <div className="flex-1">
+          <h1 className="text-3xl font-bold">{product.name}</h1>
+          <p className="text-sm text-gray-600 mt-1">
+            {product.gender} • {product.style}
+          </p>
+          <p className="text-sm uppercase tracking-wide text-gray-500">
+            {product.brand}
+          </p>
 
-          {product.discount > 0 && (
-            <span className="bg-[#D64541] text-white px-3 py-1 rounded text-sm font-semibold w-max">
-              -{product.discount}%
-            </span>
-          )}
-
-          <p className="text-2xl font-semibold">
-            {product.discount > 0 && (
-              <span className="line-through text-gray-400 mr-2">
+          {/* Precio */}
+          <div className="flex items-center gap-3 mt-6">
+            {product.discount && (
+              <span className="line-through text-gray-400 text-lg">
                 ${product.price}
               </span>
             )}
-            <span>${finalPrice}</span>
-          </p>
+            <span className="text-3xl font-bold">${finalPrice}</span>
+          </div>
 
           {/* Descripción */}
-          <p className="text-base leading-relaxed opacity-80">
-            {product.description}
-          </p>
+          <p className="mt-6 text-lg leading-relaxed">{product.description}</p>
 
-          {/* Botones */}
-          <div className="flex items-center gap-4 mt-4">
-            <button className="bg-[#D64541] text-white px-6 py-3 rounded-full hover:bg-[#FF5B57] transition-colors">
-              Agregar al carrito
-            </button>
-            <button className="p-3 rounded-full border hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20.8 4.6c-1.9-1.9-5-1.9-6.9 0l-.9.9-.9-.9c-1.9-1.9-5-1.9-6.9 0s-1.9 5 0 6.9l7.8 7.8 7.8-7.8c1.9-1.9 1.9-5 0-6.9z" />
-              </svg>
-            </button>
+          {/* Talles */}
+          <div className="mt-8">
+            <h3 className="font-semibold mb-3">Selecciona tu talle</h3>
+            <div className="flex flex-wrap gap-3">
+              {sizes.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setSelectedSize(size)}
+                  className={`px-5 py-3 rounded-md border text-sm font-medium transition 
+                    ${
+                      selectedSize === size
+                        ? "bg-black text-white border-black"
+                        : "bg-white hover:bg-gray-100 border-gray-300"
+                    }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
           </div>
+
+          {/* Botón */}
+          <button className="mt-10 px-8 py-4 rounded-xl bg-black text-white font-semibold text-lg hover:opacity-80 transition">
+            Agregar al carrito
+          </button>
         </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default ProductDetail;
