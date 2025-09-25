@@ -46,7 +46,7 @@ export const AppContextProvider = ({ children }) => {
         setLoading(false)
       } catch (error) {
         console.error("Error al obetener producto", error);
-        setLoading(false)
+        setLoading(false) 
       }
     }
 
