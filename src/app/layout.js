@@ -2,6 +2,8 @@ import { Bebas_Neue, Archivo } from "next/font/google";
 import "./globals.css";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { AppContextProvider } from '../ShopContext';
+
 
 const bebasNeue = Bebas_Neue({
   variable: "--bebas_neue",
@@ -24,9 +26,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${bebasNeue.variable} ${archivo.variable} antialiased`}>
+        <AppContextProvider> 
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
+        </AppContextProvider>
       </body>
     </html>
   );
