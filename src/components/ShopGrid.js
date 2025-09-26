@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import ShopCards from "./ShopCards";
-import { useAppContext } from "@/ShopContext";
+import { useAppContext } from "@/contexts/ShopContext";
 
 const ShopGrid = () => {
   const { products, getProducts, loading } = useAppContext();

@@ -2,7 +2,7 @@ import { Bebas_Neue, Archivo } from "next/font/google";
 import "./globals.css";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { AppContextProvider } from '../ShopContext';
+import { AppContextProvider } from '../contexts/ShopContext';
 
 
 const bebasNeue = Bebas_Neue({
