@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useContext, createContext } from "react";
+import { useState, useEffect, useContext, createContext, useCallback } from "react";
 import axios from "axios";
 
 const AppContext = createContext();
@@ -13,17 +13,17 @@ export const AppContextProvider = ({ children }) => {
   const [ProductDetail, setProductDetail] = useState();
 
   // funciones productos
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     try {
-      setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await axios.get("http://localhost:4000/products");
       setProducts(res.data.products);
-      setLoading(false);
     } catch (error) {
-      console.error("Error al obtener productos", error);
+      console.log(error);
       setLoading(false);
     }
-  }
+  }, [])
+
+  
       const getProductsByCategory = async (categorySlug) => {
         try {
           setLoading(true);
