@@ -3,107 +3,60 @@
 import { useState, useEffect, useContext, createContext, useCallback } from "react";
 import axios from "axios";
 
-const AppContext = createContext();
+const ShopContext = createContext();
 
-export const AppContextProvider = ({ children }) => {
-  const [addToCart, setAddToCart] = useState([]);
+export const ShopContextProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [ProductDetail, setProductDetail] = useState();
+  const [product, setProduct] = useState({});
 
   // funciones productos
-  const getProducts = useCallback(async () => {
+
+  const handleAddToCart = () => {
+    //setcart
+  }
+ 
+  const getProducts = useCallback(async() => {
     try {
-      const res = await axios.get("http://localhost:4000/products");
-      setProducts(res.data.products);
+      const res = await axios.get("http://localhost:4000/products")
+      console.log("products", res.data)
+      setProducts(res.data.products)
     } catch (error) {
-      console.log(error);
-      setLoading(false);
+      console.log(error)
     }
   }, [])
 
-  
-      const getProductsByCategory = async (categorySlug) => {
-        try {
-          setLoading(true);
-          const res = await axios.get(
-            `http://localhost:5000/api/categories/${categorySlug}`
-          );
-          setProducts(res.data.products);
-          setLoading(false)
-        } catch (error) {
-        console.error("Error al obtener productos de categoría", error);
-        setLoading(false);
-      };
+  const getOneProduct = useCallback(async (id) => {
+    try {
+      const res = await axios.get(`http://localhost:4000/products/${id}`)//llega por parámetro
+      console.log("product", res.data.product)
+      setProduct(res.data.product)
+    } catch (error) {
+      console.log(error)
     }
+  }, [])
 
-    const getProductById = async (id) => {
-      try {
-        setLoading(true)
-        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
-        setProductDetail(res.data.product);
-        setLoading(false)
-      } catch (error) {
-        console.error("Error al obetener producto", error);
-        setLoading(false) 
-      }
-    }
-
-    const getCategories = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/categories");
-        setCategories(res.data.categories);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error al obtener categorías", error);
-        setLoading(false);
-      }
-    };
-
-    const handleAddToCart = ({ id, name, image }) => {
-      const isOnCart = addToCart.some((product) => product.id === id);
-
-      if (isOnCart) {
-        setAddToCart(addToCart.filter((product) => product.id !== id));
-        console.log(`Chau ${name} del carrito`);
-      } else {
-      setAddToCart([...addToCart, { id, name, image }]);
-      console.log(`Agregado ${name} al carrito`);
-    };
-  };
-
-  const isCart = (id) => addToCart.some((product) => product.id === id);
-
-  const cartQty = () => addToCart.length;
+  useEffect(() => {
+    getProducts();
+  }, [])
 
   return (
-    <AppContext.Provider
+    <ShopContext.Provider
       value={{
-        addToCart,
-        handleAddToCart,
-        isCart,
-        cartQty,
         products,
-        ProductDetail,
-        categories,
-        loading,
-        getProducts,
-        getProductsByCategory,
-        getProductById,
-        getCategories,
+        product,
+        getOneProduct
       }}
     >
       {children}
-    </AppContext.Provider>
+    </ShopContext.Provider>
   );
 };
 
-export const useAppContext = () => {
-  const context = useContext(AppContext);
+export const useShopContext = () => {
+  const context = useContext(ShopContext);
   if (!context) {
-    throw new Error("useAppContext debe usarse dentro de AppContextProvider");
+    throw new Error("useShopContext must be use within a ShopContextProvider");
   }
   return context;
 };
