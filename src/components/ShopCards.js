@@ -1,4 +1,5 @@
 "use client";
+import { FiEye, FiHeart } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,7 +7,6 @@ const ShopCards = ({ product }) => {
   const { id, name, image, price, discount } = product;
 
   const finalPrice = discount ? price - discount : price;
-
 
   return (
     <article
@@ -53,15 +53,16 @@ const ShopCards = ({ product }) => {
       {/* Hover acciones - barra inferior */}
       <div className="absolute bottom-0 left-0 right-0 bg-white/90 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4 py-2">
         {/* Ir al detalle */}
-        <Link href={`/product/${id}`} className="p-2 rounded-full hover:bg-gray-200">
-          🔍
+        <Link
+          href={`/product/${id}`}
+          className="p-2 rounded-full hover:bg-gray-200"
+        >
+          <FiEye className="w-5 h-5" />
         </Link>
 
         {/* Wishlist */}
-        <button
-          className="p-2 rounded-full hover:bg-gray-200"
-        >
-          ❤️
+        <button className="p-2 rounded-full hover:bg-gray-200">
+          <FiHeart className="w-5 h-5" />
         </button>
       </div>
     </article>

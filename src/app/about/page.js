@@ -39,7 +39,7 @@ export default function About() {
               </p>
             </div>
             <div className="relative h-80 bg-gray-200 rounded-lg overflow-hidden">
-              <img
+              <image
                 src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Tienda vintage"
                 className="w-full h-full object-cover"
