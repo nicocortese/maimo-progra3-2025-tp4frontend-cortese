@@ -34,7 +34,7 @@ const ShopGrid = () => {
       {loading ? (
         <p>Cargando productos...</p>
       ) : (
-        products.map((product) => <ShopCards key={product.id} product={product} />)
+        products.map((product) => <ShopCards key={product._id} product={product} />)
       )}
       </div>
     </section>
