@@ -1,27 +1,22 @@
 "use client";
-import { useState } from "react";
+
+import { useShopContext } from "@/contexts/ShopContext";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const ProductDetail = () => {
+const ProductDetail = ({ id }) => {
+  const {getOneProduct, product} = useShopContext()
   const [selectedSize, setSelectedSize] = useState(null);
   const [mainImage, setMainImage] = useState("/assets/imgs/producto1.jpg");
 
-  const product = {
-    id: 1,
-    name: "Converse Chuck Taylor",
-    brand: "Converse",
-    gender: "Unisex",
-    style: "Moda",
-    images: [
-      "/assets/imgs/producto1.jpg",
-      "/assets/imgs/producto1-2.jpg",
-      "/assets/imgs/producto1-3.jpg",
-    ],
-    price: 180,
-    discount: 20,
-    description:
-      "Las Converse Chuck Taylor son un clásico atemporal que combina estilo urbano con comodidad. Perfectas para uso diario, con su diseño icónico y materiales de alta calidad.",
-  };
+
+  useEffect(() => {
+    getOneProduct(id)
+  }, [])
+
+ if (!product || !product._id) {
+    return <p className="text-center py-20">Cargando producto...</p>;
+  }
 
   const finalPrice = product.discount
     ? product.price - product.discount
@@ -36,20 +31,20 @@ const ProductDetail = () => {
         <div className="flex-1">
           <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow">
             <Image
-              src={mainImage}
+              src={mainImage || product.images[0]}
               alt={product.name}
               fill
               className="object-cover"
             />
           </div>
           <div className="flex gap-3 mt-4">
-            {product.images.map((img, idx) => (
+            {product.images?.map((img, idx) => (
               <div
                 key={idx}
                 onMouseEnter={() => setMainImage(img)}
                 className={`relative w-24 h-24 rounded-lg overflow-hidden cursor-pointer border transition 
                   ${
-                    mainImage === img
+                    (mainImage || product.images[0]) === img
                       ? "border-black"
                       : "border-gray-200 hover:border-black"
                   }`}

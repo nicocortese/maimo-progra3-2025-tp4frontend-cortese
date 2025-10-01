@@ -1,16 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
 import ShopCards from "./ShopCards";
-import { useAppContext } from "@/contexts/ShopContext";
+import { useShopContext } from "@/contexts/ShopContext";
 
 const ShopGrid = () => {
-  const { products, getProducts, loading } = useAppContext();
-
- useEffect(() => {
-  getProducts();
- }, [getProducts]);
+  const { products, loading } = useShopContext();
 
   return (
     <section className="max-w-[1200px] mx-auto px-4 py-10">
