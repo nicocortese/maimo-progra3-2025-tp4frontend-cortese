@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const ProductDetail = ({ id }) => {
-  const {getOneProduct, product} = useShopContext()
+  const {getOneProduct, product, handleAddToCart} = useShopContext()
   const [selectedSize, setSelectedSize] = useState(null);
   const [mainImage, setMainImage] = useState("/assets/imgs/producto1.jpg");
 
 
   useEffect(() => {
     getOneProduct(id)
-  }, [])
+  }, [id, getOneProduct])
 
  if (!product || !product._id) {
     return <p className="text-center py-20">Cargando producto...</p>;
@@ -23,6 +23,27 @@ const ProductDetail = ({ id }) => {
     : product.price;
 
   const sizes = ["38", "39", "40", "41", "42", "43", "44"];
+
+  const addToCartClick = () => {
+    if(!selectedSize) {
+      alert("Selecciona un talle antes de agregar al carrito.")
+      return;
+    }
+
+    const productCart = {
+      _id: product._id,
+      name: product.name,
+      price: finalPrice,
+      image: product.images[0],
+      size: selectedSize,
+    };
+
+    handleAddToCart(productCart);
+  }
+
+  if (!product || !product._id) {
+    return <p className="text-center py-20">Cargando producto...</p>;
+  }
 
   return (
     <section className="max-w-[1200px] mx-auto px-6 py-16">
@@ -105,7 +126,8 @@ const ProductDetail = ({ id }) => {
           </div>
 
           {/* Botón */}
-          <button className="mt-10 px-8 py-4 rounded-xl bg-black text-white font-semibold text-lg hover:opacity-80 transition">
+          <button onClick={addToCartClick}
+          className="mt-10 px-8 py-4 rounded-xl bg-black text-white font-semibold text-lg hover:opacity-80 transition">
             Agregar al carrito
           </button>
         </div>
