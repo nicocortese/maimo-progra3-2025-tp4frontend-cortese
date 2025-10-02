@@ -3,9 +3,12 @@
 import Link from "next/link";
 import ShopCards from "./ShopCards";
 import { useShopContext } from "@/contexts/ShopContext";
+import Loading from "@/components/Loading";
 
 const ShopGrid = () => {
   const { products, loading } = useShopContext();
+
+  if (loading) return <Loading />;
 
   return (
     <section className="max-w-[1200px] mx-auto px-4 py-10">
