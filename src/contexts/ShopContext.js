@@ -67,8 +67,7 @@ export const ShopContextProvider = ({ children }) => {
     } finally {
       setLoading(false)
     }
-    
-  })
+  }, [])
 
   useEffect(() => {
     getProducts();
