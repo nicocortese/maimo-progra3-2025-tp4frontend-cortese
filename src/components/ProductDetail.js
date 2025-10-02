@@ -40,8 +40,8 @@ const ProductDetail = ({ id }) => {
     handleAddToCart(productCart);
   }
 
-
   if (loading) return <Loading />;
+
 
   return (
     <section className="max-w-[1200px] mx-auto px-6 py-16">
