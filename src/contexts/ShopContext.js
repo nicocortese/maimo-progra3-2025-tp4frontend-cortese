@@ -2,8 +2,11 @@
 
 import { useState, useEffect, useContext, createContext, useCallback } from "react";
 import axios from "axios";
+import Loading from "@/components/Loading";
 
 const ShopContext = createContext();
+
+
 
 export const ShopContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
@@ -36,6 +39,7 @@ export const ShopContextProvider = ({ children }) => {
       setProducts(res.data.products)
     } catch (error) {
       console.log(error)
+    } finally {
       setLoading(false)
     }
   }, [])
@@ -48,7 +52,8 @@ export const ShopContextProvider = ({ children }) => {
       setProduct(res.data.product)
     } catch (error) {
       console.log(error)
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   }, [])
 
@@ -59,6 +64,7 @@ export const ShopContextProvider = ({ children }) => {
       setCategoryProducts(res.data.products);
     } catch (error) {
       console.log(error)
+    } finally {
       setLoading(false)
     }
     
@@ -86,6 +92,8 @@ export const ShopContextProvider = ({ children }) => {
     </ShopContext.Provider>
   );
 };
+
+
 
 export const useShopContext = () => {
   const context = useContext(ShopContext);

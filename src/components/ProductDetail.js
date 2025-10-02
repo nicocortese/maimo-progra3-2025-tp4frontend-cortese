@@ -3,9 +3,10 @@
 import { useShopContext } from "@/contexts/ShopContext";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Loading from "@/components/Loading";
 
 const ProductDetail = ({ id }) => {
-  const {getOneProduct, product, handleAddToCart} = useShopContext()
+  const {getOneProduct, product, handleAddToCart, loading} = useShopContext()
   const [selectedSize, setSelectedSize] = useState(null);
   const [mainImage, setMainImage] = useState("/assets/imgs/producto1.jpg");
 
@@ -14,9 +15,7 @@ const ProductDetail = ({ id }) => {
     getOneProduct(id)
   }, [id, getOneProduct])
 
- if (!product || !product._id) {
-    return <p className="text-center py-20">Cargando producto...</p>;
-  }
+  if (loading) return <Loading />;
 
   const finalPrice = product.discount
     ? product.price - product.discount
@@ -41,9 +40,8 @@ const ProductDetail = ({ id }) => {
     handleAddToCart(productCart);
   }
 
-  if (!product || !product._id) {
-    return <p className="text-center py-20">Cargando producto...</p>;
-  }
+  if (loading) return <Loading />;
+
 
   return (
     <section className="max-w-[1200px] mx-auto px-6 py-16">
