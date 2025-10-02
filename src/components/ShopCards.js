@@ -19,8 +19,8 @@ const ShopCards = ({ product }) => {
       {/* Imagen */}
       <div className="relative w-full h-60">
         <Image
-          src={image}
-          alt={name}
+          src={`/assets/imgs/${image}`}
+          alt={name || "Producto sin nombre"}
           fill
           className="object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
         />
