@@ -1,12 +1,16 @@
 "use client";
 
-import { useState, useEffect, useContext, createContext, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  useCallback,
+} from "react";
 import axios from "axios";
 import Loading from "@/components/Loading";
 
 const ShopContext = createContext();
-
-
 
 export const ShopContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
@@ -17,61 +21,67 @@ export const ShopContextProvider = ({ children }) => {
 
   // funciones productos
 
-  const handleAddToCart = (productToAdd) => {
-    const existingProduct = cart.find(
-      (item) => item._id === productToAdd._id && item.size === productToAdd.size
+  const handleAddToCart = () => {
+    let productToAdd = {};
+    const findProduct = cart.find(
+      (productInCart) => productInCart._id === product._id
     );
 
-    if (existingProduct) {
-      alert("Este producto con el mismo talle ya está en tu carrito.");
-      return;
+    if (findProduct) {
+      productToAdd = { ...findProduct, qty: findProduct.qty + product.qty };
+    } else {
+      productToAdd = product;
     }
-    setCart(preCart => [...preCart, {...productToAdd, cartItemId: `${productToAdd._id}-${productToAdd.size}`}]);
-    alert(`${productToAdd.name} (Talle: ${productToAdd.size}) agregado al carrito!`);
+    const filteredCart = cart.filter(
+      (productInCart) => productInCart._id !== product._id
+    );
+    setCart([...cart, productToAdd]);
     //setcart
   };
- 
-  const getProducts = useCallback(async() => {
-    try {
-      setLoading(true)
-      const res = await axios.get("http://localhost:4000/products")
-      console.log("products", res.data)
-      setProducts(res.data.products)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
 
-  const getOneProduct = useCallback(async (id) => {
+  const getProducts = useCallback(async () => {
     try {
-      setLoading(true)
-      const res = await axios.get(`http://localhost:4000/products/${id}`)//llega por parámetro
-      console.log("product", res.data.product)
-      setProduct(res.data.product)
+      setLoading(true);
+      const res = await axios.get("http://localhost:4000/products");
+      console.log("products", res.data);
+      setProducts(res.data.products);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
-  }, [])
+  }, []);
+
+  const getOneProduct = useCallback(async (id) => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`http://localhost:4000/products/${id}`); //llega por parámetro
+      console.log("product", res.data.product);
+      setProduct(res.data.product);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   const getProductBycategory = useCallback(async (slug) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const res = await axios.get (`http://localhost:4000/products/category${slug}`);
+      const res = await axios.get(
+        `http://localhost:4000/products/category${slug}`
+      );
       setCategoryProducts(res.data.products);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     getProducts();
-  }, [getProducts])
+  }, [getProducts]);
 
   return (
     <ShopContext.Provider
@@ -79,20 +89,19 @@ export const ShopContextProvider = ({ children }) => {
         products,
         product,
         cart,
+        cartQty,
+        handleAddToCart,
         loading,
         getProducts,
         getOneProduct,
         getProductBycategory,
         categoryProducts,
-        handleAddToCart,
       }}
     >
       {children}
     </ShopContext.Provider>
   );
 };
-
-
 
 export const useShopContext = () => {
   const context = useContext(ShopContext);

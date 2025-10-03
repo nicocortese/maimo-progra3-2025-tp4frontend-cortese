@@ -65,7 +65,7 @@ const Navbar = () => {
             </button>
 
             {/* Logo - centrado en mobile, izquierda en desktop */}
-            <Link href="/" className="logoFont text-[#FFEFEF] font-bold text-2xl md:text-4xl">
+            <Link href="/CheckoutContainer" className="logoFont text-[#FFEFEF] font-bold text-2xl md:text-4xl">
               LOGO PÁGINA
             </Link>
           </div>
