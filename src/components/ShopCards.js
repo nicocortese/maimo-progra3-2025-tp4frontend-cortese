@@ -4,9 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ShopCards = ({ product }) => {
-  const { id, name, image, price, discount } = product;
+  const { _id, name, images, price, discount } = product;
+
+  const primaryImage = (images && images.length > 0)
+  ? images[0]
+  : null;
 
   const finalPrice = discount ? price - discount : price;
+
+  
 
   return (
     <article
@@ -18,12 +24,19 @@ const ShopCards = ({ product }) => {
     >
       {/* Imagen */}
       <div className="relative w-full h-60">
+        {primaryImage ? (
         <Image
-          src={`/assets/imgs/${image}`}
-          alt={name || "Producto sin nombre"}
-          fill
+          src={`/assets/imgs/${primaryImage}`}
+          alt={`Imagen de ${name}`}
+          width={400}
+          height={400}
           className="object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
         />
+        ) : (
+          <div className="flex items-center justify-center h-full text-center p-4 bg-gray-100 text-gray-500 font-semibold">
+            No hay imagen disponible.
+          </div>
+        )}
       </div>
 
       {/* Badge de descuento */}

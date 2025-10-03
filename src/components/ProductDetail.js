@@ -23,10 +23,14 @@ const ProductDetail = ({ id }) => {
 
   const sizes = ["38", "39", "40", "41", "42", "43", "44"];
 
-  const addToCartClick = () => {
-    if(!selectedSize) {
-      alert("Selecciona un talle antes de agregar al carrito.")
-      return;
+  const addToCart = (product) => {
+    const productToAdd = {
+      ...product,
+      qty: 1,
+    };
+  }
+    handleAddToCart(productToAdd)
+
     }
 
     const productCart = {
@@ -37,8 +41,6 @@ const ProductDetail = ({ id }) => {
       size: selectedSize,
     };
 
-    handleAddToCart(productCart);
-  }
 
   if (loading) return <Loading />;
 
@@ -50,8 +52,8 @@ const ProductDetail = ({ id }) => {
         <div className="flex-1">
           <div className="relative w-full h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-gray-100">
             <Image
-              src={mainImage || product.images[0]}
-              alt={product.name}
+              src={`/assets/imgs/${product.images[0]}`}
+              alt={product.name || "productos"}
               fill
               className="object-contain p-8"
             />
@@ -69,7 +71,7 @@ const ProductDetail = ({ id }) => {
                   }`}
               >
                 <Image
-                  src={img}
+                  src={`/assets/imgs/${img}`}
                   alt={`${product.name}-${idx}`}
                   fill
                   className="object-cover"
@@ -141,7 +143,7 @@ const ProductDetail = ({ id }) => {
 
           {/* Botón */}
           <button
-            onClick={addToCartClick}
+            onClick= {(() => handleAddToCart)}
             className="mt-10 w-full px-8 py-5 rounded-xl bg-red-600 text-white font-bold text-lg hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             Agregar al carrito
@@ -172,6 +174,6 @@ const ProductDetail = ({ id }) => {
       </div>
     </section>
   );
-};
+
 
 export default ProductDetail;
